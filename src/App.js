@@ -4,19 +4,24 @@ import React, { useState } from 'react';
 import CircularRing from './components/CircularRing';
 import GameTitle from './components/GameTitle';
 import MoveButton from './components/MoveButton';
+import ActionButton from './components/ActionButton';
 
 function App() {
 
-  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+  const [playerCircleIndex, setPlayerCircleIndex] = useState(0);
+  const [playerHealth, setPlayerHealth] = useState("HEALTHY");
 
   const TOTAL_AREAS = 10;
   const handleClockwiseMovement = () => {
-    setCurrentPlayerIndex(prevIndex => (prevIndex + 1) % TOTAL_AREAS);
+    setPlayerCircleIndex(prevIndex => (prevIndex + 1) % TOTAL_AREAS);
   };
   const handleCounterClockwiseMovement = () => {
-    setCurrentPlayerIndex(prevIndex => {
+    setPlayerCircleIndex(prevIndex => {
       return prevIndex === 0 ? TOTAL_AREAS - 1 : prevIndex - 1;
     });
+  }
+  const handleFightButtonClick = () => {
+    setPlayerHealth("INJURED");
   }
 
   return (
@@ -24,7 +29,8 @@ function App() {
       <header className="App-header">
         <GameTitle />
         <CircularRing
-          greenCircleIndex={currentPlayerIndex}
+          playerCircleIndex={playerCircleIndex}
+          playerHealth={playerHealth}
         />
         <MoveButton
           text="Move Clockwise"
@@ -33,6 +39,10 @@ function App() {
         <MoveButton
           text="Move Counter-Clockwise"
           onClick={handleCounterClockwiseMovement}
+        />
+        <ActionButton
+          text="Fight"
+          onClick={handleFightButtonClick}
         />
       </header>
     </div>

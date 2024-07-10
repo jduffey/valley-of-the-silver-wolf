@@ -1,6 +1,9 @@
 import React from 'react';
 
-const CircularRing = ({ greenCircleIndex }) => {
+const CircularRing = ({
+  playerCircleIndex,
+  playerHealth
+}) => {
   const ringSize = 400;
   const circleSize = 40;
   const numberOfCircles = 10;
@@ -12,7 +15,10 @@ const CircularRing = ({ greenCircleIndex }) => {
       const x = Math.cos(angle) * (ringSize / 2 - circleSize / 2) + (ringSize / 2);
       const y = Math.sin(angle) * (ringSize / 2 - circleSize / 2) + (ringSize / 2);
 
-      const fillColor = i === greenCircleIndex ? 'green' : 'white';
+      const HEALTHY_PLAYER_COLOR = 'green';
+      const INJURED_PLAYER_COLOR = 'orange';
+      const playerColor = playerHealth === 'HEALTHY' ? HEALTHY_PLAYER_COLOR : INJURED_PLAYER_COLOR;
+      const fillColor = i === playerCircleIndex ? playerColor : 'white';
       const OTHER_PLAYER_POS_INDEX = 1;
       const strokeColor = i === OTHER_PLAYER_POS_INDEX ? 'red' : 'black';
 
