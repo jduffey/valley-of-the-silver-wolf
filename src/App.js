@@ -9,10 +9,15 @@ function App() {
 
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
 
-  const handleMoveButtonClick = () => {
-    const TOTAL_AREAS = 10;
+  const TOTAL_AREAS = 10;
+  const handleClockwiseMovement = () => {
     setCurrentPlayerIndex(prevIndex => (prevIndex + 1) % TOTAL_AREAS);
   };
+  const handleCounterClockwiseMovement = () => {
+    setCurrentPlayerIndex(prevIndex => {
+      return prevIndex === 0 ? TOTAL_AREAS - 1 : prevIndex - 1;
+    });
+  }
 
   return (
     <div className="App">
@@ -22,7 +27,12 @@ function App() {
           greenCircleIndex={currentPlayerIndex}
         />
         <MoveButton
-          onClick={handleMoveButtonClick}
+          text="Move Clockwise"
+          onClick={handleClockwiseMovement}
+        />
+        <MoveButton
+          text="Move Counter-Clockwise"
+          onClick={handleCounterClockwiseMovement}
         />
       </header>
     </div>

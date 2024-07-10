@@ -1,9 +1,12 @@
 import React from 'react';
 
-const MoveButton = ({ onClick }) => {
+const MoveButton = ({
+  text,
+  onClick
+}) => {
   return (
     <button onClick={onClick}>
-      Move
+      {text}
     </button>
   );
 };
