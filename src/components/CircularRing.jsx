@@ -13,6 +13,8 @@ const CircularRing = ({ greenCircleIndex }) => {
       const y = Math.sin(angle) * (ringSize / 2 - circleSize / 2) + (ringSize / 2);
 
       const fillColor = i === greenCircleIndex ? 'green' : 'white';
+      const OTHER_PLAYER_POS_INDEX = 1;
+      const strokeColor = i === OTHER_PLAYER_POS_INDEX ? 'red' : 'black';
 
       circles.push(
         <circle
@@ -21,7 +23,8 @@ const CircularRing = ({ greenCircleIndex }) => {
           cy={y}
           r={circleSize / 2}
           fill={fillColor}
-          stroke="black"
+          strokeWidth={2}
+          stroke={strokeColor}
         />
       );
     }
