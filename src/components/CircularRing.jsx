@@ -6,12 +6,14 @@ const CircularRing = ({
   enemyCircleIndex
 }) => {
   const ringSize = 400;
-  const circleSize = 40;
+  const outskirtsCircleSize = 40;
+  const cityCircleSize = 60;
   const numberOfCircles = 10;
 
   const renderCircles = () => {
     const circles = [];
     for (let i = 0; i < numberOfCircles; i++) {
+      const circleSize = i % 2 === 1 ? outskirtsCircleSize : cityCircleSize;
       const angle = (i / numberOfCircles) * 2 * Math.PI;
       const x = Math.cos(angle) * (ringSize / 2 - circleSize / 2) + (ringSize / 2);
       const y = Math.sin(angle) * (ringSize / 2 - circleSize / 2) + (ringSize / 2);
@@ -42,7 +44,7 @@ const CircularRing = ({
       <circle
         cx={ringSize / 2}
         cy={ringSize / 2}
-        r={ringSize / 2 - circleSize / 2}
+        r={ringSize / 2 - ((cityCircleSize + outskirtsCircleSize) / 2) / 2}
         fill="none"
         stroke="black"
         strokeWidth="2"
