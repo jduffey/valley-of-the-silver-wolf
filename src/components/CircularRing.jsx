@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CircularRing = () => {
+const CircularRing = ({ greenCircleIndex }) => {
   const ringSize = 400;
   const circleSize = 40;
   const numberOfCircles = 10;
@@ -12,13 +12,15 @@ const CircularRing = () => {
       const x = Math.cos(angle) * (ringSize / 2 - circleSize / 2) + (ringSize / 2);
       const y = Math.sin(angle) * (ringSize / 2 - circleSize / 2) + (ringSize / 2);
 
+      const fillColor = i === greenCircleIndex ? 'green' : 'white';
+
       circles.push(
         <circle
           key={i}
           cx={x}
           cy={y}
           r={circleSize / 2}
-          fill="white"
+          fill={fillColor}
           stroke="black"
         />
       );

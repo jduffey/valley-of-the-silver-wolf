@@ -1,24 +1,28 @@
 import './App.css';
+import React, { useState } from 'react';
+
 import CircularRing from './components/CircularRing';
+import GameTitle from './components/GameTitle';
+import MoveButton from './components/MoveButton';
 
 function App() {
 
-  const Header = () => {
-    return (
-      <header>
-        <h1>Valley Of The Silver Wolf</h1>
-      </header>
-    );
-  }
+  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+
+  const handleMoveButtonClick = () => {
+    setCurrentPlayerIndex(prevIndex => (prevIndex + 1) % 10);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
-        <Header />
-        <CircularRing />
-        <p>
-          Town Name
-        </p>
+        <GameTitle />
+        <CircularRing
+          greenCircleIndex={currentPlayerIndex}
+        />
+        <MoveButton
+          onClick={handleMoveButtonClick}
+        />
       </header>
     </div>
   );
