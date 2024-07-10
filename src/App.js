@@ -1,22 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import CircularRing from './components/CircularRing';
 
 function App() {
+
+  const Header = () => {
+    return (
+      <header>
+        <h1>Valley Of The Silver Wolf</h1>
+      </header>
+    );
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Header />
+        <CircularRing />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Town Name
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
