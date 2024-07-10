@@ -10,7 +10,8 @@ function App() {
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
 
   const handleMoveButtonClick = () => {
-    setCurrentPlayerIndex(prevIndex => (prevIndex + 1) % 10);
+    const TOTAL_AREAS = 10;
+    setCurrentPlayerIndex(prevIndex => (prevIndex + 1) % TOTAL_AREAS);
   };
 
   return (
