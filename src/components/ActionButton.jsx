@@ -2,10 +2,14 @@ import React from 'react';
 
 const ActionButton = ({
   text,
-  onClick
+  onClick,
+  isDisabled
 }) => {
   return (
-    <button onClick={onClick}>
+    <button
+      onClick={onClick}
+      disabled={isDisabled}
+    >
       {text}
     </button>
   );

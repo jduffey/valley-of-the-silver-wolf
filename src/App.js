@@ -9,15 +9,23 @@ import ActionButton from './components/ActionButton';
 function App() {
 
   const [playerCircleIndex, setPlayerCircleIndex] = useState(0);
+  const [enemyCircleIndex, setEnemyCircleIndex] = useState(1);
   const [playerHealth, setPlayerHealth] = useState("HEALTHY");
+  const [isFightButtonDisabled, setIsFightButtonDisabled] = useState(true);
 
   const TOTAL_AREAS = 10;
   const handleClockwiseMovement = () => {
-    setPlayerCircleIndex(prevIndex => (prevIndex + 1) % TOTAL_AREAS);
+    setPlayerCircleIndex(prevIndex => {
+      const newIndex = (prevIndex + 1) % TOTAL_AREAS;
+      setIsFightButtonDisabled(newIndex !== enemyCircleIndex);
+      return newIndex;
+    });
   };
   const handleCounterClockwiseMovement = () => {
     setPlayerCircleIndex(prevIndex => {
-      return prevIndex === 0 ? TOTAL_AREAS - 1 : prevIndex - 1;
+      const newIndex = (prevIndex - 1 + TOTAL_AREAS) % TOTAL_AREAS;
+      setIsFightButtonDisabled(newIndex !== enemyCircleIndex);
+      return newIndex;
     });
   }
   const handleFightButtonClick = () => {
@@ -31,6 +39,7 @@ function App() {
         <CircularRing
           playerCircleIndex={playerCircleIndex}
           playerHealth={playerHealth}
+          enemyCircleIndex={enemyCircleIndex}
         />
         <MoveButton
           text="Move Clockwise"
@@ -43,6 +52,7 @@ function App() {
         <ActionButton
           text="Fight"
           onClick={handleFightButtonClick}
+          isDisabled={isFightButtonDisabled}
         />
       </header>
     </div>

@@ -2,7 +2,8 @@ import React from 'react';
 
 const CircularRing = ({
   playerCircleIndex,
-  playerHealth
+  playerHealth,
+  enemyCircleIndex
 }) => {
   const ringSize = 400;
   const circleSize = 40;
@@ -19,8 +20,7 @@ const CircularRing = ({
       const INJURED_PLAYER_COLOR = 'orange';
       const playerColor = playerHealth === 'HEALTHY' ? HEALTHY_PLAYER_COLOR : INJURED_PLAYER_COLOR;
       const fillColor = i === playerCircleIndex ? playerColor : 'white';
-      const OTHER_PLAYER_POS_INDEX = 1;
-      const strokeColor = i === OTHER_PLAYER_POS_INDEX ? 'red' : 'black';
+      const strokeColor = i === enemyCircleIndex ? 'red' : 'black';
 
       circles.push(
         <circle
