@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CircularRing = ({
+const WorldMap = ({
   playerCircleIndex,
   playerHealth,
   enemyCircleIndex
@@ -54,4 +54,4 @@ const CircularRing = ({
   );
 };
 
-export default CircularRing;
+export default WorldMap;

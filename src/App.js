@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 
-import CircularRing from './components/CircularRing';
+import WorldMap from './components/WorldMap';
 import GameTitle from './components/GameTitle';
 import MoveButton from './components/MoveButton';
 import ActionButton from './components/ActionButton';
@@ -36,7 +36,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <GameTitle />
-        <CircularRing
+        <WorldMap
           playerCircleIndex={playerCircleIndex}
           playerHealth={playerHealth}
           enemyCircleIndex={enemyCircleIndex}
