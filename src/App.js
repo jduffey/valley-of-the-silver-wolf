@@ -21,6 +21,10 @@ function App() {
     setIsHealButtonDisabled(newIndex % 2 === 1 || playerHealth === "HEALTHY");
   }
 
+  const didPlayerWinFight = () => {
+    return false;
+  }
+
   const handleClockwiseMovement = () => {
     setPlayerCircleIndex(prevIndex => {
       const newIndex = (prevIndex + 1) % TOTAL_AREAS;
@@ -41,6 +45,10 @@ function App() {
   }
   const handleFightButtonClick = () => {
     setPlayerHealth(() => {
+      if (didPlayerWinFight()) {
+        return "HEALTHY";
+      }
+
       setIsFightButtonDisabled(true);
       return "INJURED";
     });
