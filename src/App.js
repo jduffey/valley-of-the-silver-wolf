@@ -15,12 +15,17 @@ function App() {
   const [isHealButtonDisabled, setIsHealButtonDisabled] = useState(true);
 
   const TOTAL_AREAS = 10;
+
+  const updateStates = (newIndex, enemyCircleIndex, playerHealth) => {
+    setIsFightButtonDisabled(newIndex !== enemyCircleIndex || playerHealth === "INJURED");
+    setIsHealButtonDisabled(newIndex % 2 === 1 || playerHealth === "HEALTHY");
+  }
+
   const handleClockwiseMovement = () => {
     setPlayerCircleIndex(prevIndex => {
       const newIndex = (prevIndex + 1) % TOTAL_AREAS;
 
-      setIsFightButtonDisabled(newIndex !== enemyCircleIndex || playerHealth === "INJURED");
-      setIsHealButtonDisabled(newIndex % 2 === 1 || playerHealth === "HEALTHY");
+      updateStates(newIndex, enemyCircleIndex, playerHealth);
 
       return newIndex;
     });
@@ -29,8 +34,7 @@ function App() {
     setPlayerCircleIndex(prevIndex => {
       const newIndex = (prevIndex - 1 + TOTAL_AREAS) % TOTAL_AREAS;
 
-      setIsFightButtonDisabled(newIndex !== enemyCircleIndex || playerHealth === "INJURED");
-      setIsHealButtonDisabled(newIndex % 2 === 1 || playerHealth === "HEALTHY");
+      updateStates(newIndex, enemyCircleIndex, playerHealth);
 
       return newIndex;
     });
