@@ -19,8 +19,8 @@ function App() {
     setPlayerCircleIndex(prevIndex => {
       const newIndex = (prevIndex + 1) % TOTAL_AREAS;
 
-      setIsFightButtonDisabled(newIndex !== enemyCircleIndex);
-      setIsHealButtonDisabled(newIndex % 2 === 1);
+      setIsFightButtonDisabled(newIndex !== enemyCircleIndex || playerHealth === "INJURED");
+      setIsHealButtonDisabled(newIndex % 2 === 1 || playerHealth === "HEALTHY");
 
       return newIndex;
     });
@@ -29,17 +29,23 @@ function App() {
     setPlayerCircleIndex(prevIndex => {
       const newIndex = (prevIndex - 1 + TOTAL_AREAS) % TOTAL_AREAS;
 
-      setIsFightButtonDisabled(newIndex !== enemyCircleIndex);
-      setIsHealButtonDisabled(newIndex % 2 === 1);
+      setIsFightButtonDisabled(newIndex !== enemyCircleIndex || playerHealth === "INJURED");
+      setIsHealButtonDisabled(newIndex % 2 === 1 || playerHealth === "HEALTHY");
 
       return newIndex;
     });
   }
   const handleFightButtonClick = () => {
-    setPlayerHealth("INJURED");
+    setPlayerHealth(() => {
+      setIsFightButtonDisabled(true);
+      return "INJURED";
+    });
   }
   const handleHealButtonClick = () => {
-    setPlayerHealth("HEALTHY");
+    setPlayerHealth(() => {
+      setIsHealButtonDisabled(true);
+      return "HEALTHY";
+    });
   }
 
   return (
