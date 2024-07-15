@@ -40,17 +40,25 @@ const WorldMap = ({
   };
 
   return (
-    <svg width={ringSize} height={ringSize}>
-      <circle
-        cx={ringSize / 2}
-        cy={ringSize / 2}
-        r={ringSize / 2 - ((cityCircleSize + outskirtsCircleSize) / 2) / 2}
-        fill="none"
-        stroke="black"
-        strokeWidth="2"
-      />
-      {renderCircles()}
-    </svg>
+    <div className="world-map"
+      style={{
+        border: '1px solid black',
+        borderRadius: '5%',
+        padding: '5px',
+      }}
+    >
+      <svg width={ringSize} height={ringSize}>
+        <circle
+          cx={ringSize / 2}
+          cy={ringSize / 2}
+          r={ringSize / 2 - ((cityCircleSize + outskirtsCircleSize) / 2) / 2}
+          fill="none"
+          stroke="black"
+          strokeWidth="2"
+        />
+        {renderCircles()}
+      </svg>
+    </div>
   );
 };
 

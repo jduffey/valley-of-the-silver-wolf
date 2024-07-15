@@ -41,19 +41,26 @@ function App() {
           playerHealth={playerHealth}
           enemyCircleIndex={enemyCircleIndex}
         />
-        <MoveButton
-          text="Move Clockwise"
-          onClick={handleClockwiseMovement}
-        />
-        <MoveButton
-          text="Move Counter-Clockwise"
-          onClick={handleCounterClockwiseMovement}
-        />
-        <ActionButton
-          text="Fight"
-          onClick={handleFightButtonClick}
-          isDisabled={isFightButtonDisabled}
-        />
+        <div style={{
+          marginBottom: '10px',
+          border: '1px solid black',
+          borderRadius: '20px',
+          padding: '10px',
+        }}>
+          <MoveButton
+            text="Move Clockwise"
+            onClick={handleClockwiseMovement}
+          />
+          <MoveButton
+            text="Move Counter-Clockwise"
+            onClick={handleCounterClockwiseMovement}
+          />
+          <ActionButton
+            text="Fight"
+            onClick={handleFightButtonClick}
+            isDisabled={isFightButtonDisabled}
+          />
+        </div>
       </header>
     </div>
   );
