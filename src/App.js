@@ -12,24 +12,34 @@ function App() {
   const [enemyCircleIndex, setEnemyCircleIndex] = useState(1);
   const [playerHealth, setPlayerHealth] = useState("HEALTHY");
   const [isFightButtonDisabled, setIsFightButtonDisabled] = useState(true);
+  const [isHealButtonDisabled, setIsHealButtonDisabled] = useState(true);
 
   const TOTAL_AREAS = 10;
   const handleClockwiseMovement = () => {
     setPlayerCircleIndex(prevIndex => {
       const newIndex = (prevIndex + 1) % TOTAL_AREAS;
+
       setIsFightButtonDisabled(newIndex !== enemyCircleIndex);
+      setIsHealButtonDisabled(newIndex % 2 === 1);
+
       return newIndex;
     });
   };
   const handleCounterClockwiseMovement = () => {
     setPlayerCircleIndex(prevIndex => {
       const newIndex = (prevIndex - 1 + TOTAL_AREAS) % TOTAL_AREAS;
+
       setIsFightButtonDisabled(newIndex !== enemyCircleIndex);
+      setIsHealButtonDisabled(newIndex % 2 === 1);
+
       return newIndex;
     });
   }
   const handleFightButtonClick = () => {
     setPlayerHealth("INJURED");
+  }
+  const handleHealButtonClick = () => {
+    setPlayerHealth("HEALTHY");
   }
 
   return (
@@ -59,6 +69,11 @@ function App() {
             text="Fight"
             onClick={handleFightButtonClick}
             isDisabled={isFightButtonDisabled}
+          />
+          <ActionButton
+            text="Heal"
+            onClick={handleHealButtonClick}
+            isDisabled={isHealButtonDisabled}
           />
         </div>
       </header>
