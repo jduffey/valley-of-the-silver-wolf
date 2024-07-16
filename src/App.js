@@ -18,33 +18,25 @@ function App() {
 
   const TOTAL_AREAS = 10;
 
-  const updateStates = (newIndex, enemyCircleIndex, playerHealth) => {
+  const updateButtons = (newIndex, enemyCircleIndex, playerHealth) => {
     setIsFightButtonDisabled(newIndex !== enemyCircleIndex || playerHealth === "INJURED");
     setIsHealButtonDisabled(newIndex % 2 === 1 || playerHealth === "HEALTHY");
   }
 
   const didPlayerWinFight = () => {
-    return true;
+    return false;
   }
 
-  const handleClockwiseMovement = () => {
+  const handleMoveButton = (direction) => {
     setPlayerCircleIndex(prevIndex => {
-      const newIndex = (prevIndex + 1) % TOTAL_AREAS;
+      const newIndex = (prevIndex + direction + TOTAL_AREAS) % TOTAL_AREAS;
 
-      updateStates(newIndex, enemyCircleIndex, playerHealth);
-
-      return newIndex;
-    });
-  };
-  const handleCounterClockwiseMovement = () => {
-    setPlayerCircleIndex(prevIndex => {
-      const newIndex = (prevIndex - 1 + TOTAL_AREAS) % TOTAL_AREAS;
-
-      updateStates(newIndex, enemyCircleIndex, playerHealth);
+      updateButtons(newIndex, enemyCircleIndex, playerHealth);
 
       return newIndex;
     });
   }
+
   const handleFightButtonClick = () => {
     if (didPlayerWinFight()) {
       console.log("Player won the fight!");
@@ -67,7 +59,7 @@ function App() {
   const getReputationColor = () => {
     if (playerReputation === 5) {
       return 'gold';
-    } else if (playerReputation === 3 | playerReputation === 4) {
+    } else if (playerReputation === 3 || playerReputation === 4) {
       return '#8b4614';
     } else {
       return 'black';
@@ -91,11 +83,11 @@ function App() {
         }}>
           <MoveButton
             text="Move Clockwise"
-            onClick={handleClockwiseMovement}
+            onClick={handleMoveButton.bind(null, 1)}
           />
           <MoveButton
             text="Move Counter-Clockwise"
-            onClick={handleCounterClockwiseMovement}
+            onClick={handleMoveButton.bind(null, -1)}
           />
           <ActionButton
             text="Fight"
