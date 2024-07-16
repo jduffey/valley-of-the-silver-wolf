@@ -64,6 +64,16 @@ function App() {
     });
   }
 
+  const getReputationColor = () => {
+    if (playerReputation === 5) {
+      return 'gold';
+    } else if (playerReputation === 3 | playerReputation === 4) {
+      return '#8b4614';
+    } else {
+      return 'black';
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -103,6 +113,7 @@ function App() {
           enemyCircleIndex={enemyCircleIndex}
           playerHealth={playerHealth}
           playerReputation={playerReputation}
+          reputationColor={getReputationColor()}
         />
       </header>
     </div>
