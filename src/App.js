@@ -5,12 +5,14 @@ import WorldMap from './components/WorldMap';
 import GameTitle from './components/GameTitle';
 import MoveButton from './components/MoveButton';
 import ActionButton from './components/ActionButton';
+import PlayerInfo from './components/PlayerInfo';
 
 function App() {
 
   const [playerCircleIndex, setPlayerCircleIndex] = useState(0);
   const [enemyCircleIndex, setEnemyCircleIndex] = useState(1);
   const [playerHealth, setPlayerHealth] = useState("HEALTHY");
+  const [playerReputation, setPlayerReputation] = useState(2);
   const [isFightButtonDisabled, setIsFightButtonDisabled] = useState(true);
   const [isHealButtonDisabled, setIsHealButtonDisabled] = useState(true);
 
@@ -44,14 +46,16 @@ function App() {
     });
   }
   const handleFightButtonClick = () => {
-    setPlayerHealth(() => {
-      if (didPlayerWinFight()) {
-        return "HEALTHY";
-      }
-
+    if (didPlayerWinFight()) {
+      console.log("Player won the fight!");
+      setPlayerHealth("HEALTHY");
+      setPlayerReputation(prevReputation => prevReputation + 1);
+    } else {
+      console.log("Player lost the fight!");
+      setPlayerHealth("INJURED");
+      setPlayerReputation(prevReputation => prevReputation - 1);
       setIsFightButtonDisabled(true);
-      return "INJURED";
-    });
+    }
   }
   const handleHealButtonClick = () => {
     setPlayerHealth(() => {
@@ -94,6 +98,12 @@ function App() {
             isDisabled={isHealButtonDisabled}
           />
         </div>
+        <PlayerInfo
+          playerCircleIndex={playerCircleIndex}
+          enemyCircleIndex={enemyCircleIndex}
+          playerHealth={playerHealth}
+          playerReputation={playerReputation}
+        />
       </header>
     </div>
   );
