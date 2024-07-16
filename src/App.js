@@ -24,7 +24,7 @@ function App() {
   }
 
   const didPlayerWinFight = () => {
-    return false;
+    return true;
   }
 
   const handleClockwiseMovement = () => {
@@ -49,11 +49,11 @@ function App() {
     if (didPlayerWinFight()) {
       console.log("Player won the fight!");
       setPlayerHealth("HEALTHY");
-      setPlayerReputation(prevReputation => prevReputation + 1);
+      setPlayerReputation(prevReputation => Math.min(prevReputation + 1, 5));
     } else {
       console.log("Player lost the fight!");
       setPlayerHealth("INJURED");
-      setPlayerReputation(prevReputation => prevReputation - 1);
+      setPlayerReputation(prevReputation => Math.max(prevReputation - 1, 1));
       setIsFightButtonDisabled(true);
     }
   }
